@@ -5,96 +5,112 @@ import Navbar from "./Navbar";
 import { FiArrowRight } from "react-icons/fi";
 
 const Home = () => {
-  const initialProducts = [
-    {
-      name: "Organic Gala Apples",
-      price: "$2.99 / lb",
-      description: "Crisp and sweet, perfect for snacking or baking.",
-      category: "Fruits and Vegetables",
-    },
-    {
-      name: "Fresh Romaine Lettuce",
-      price: "$1.49 each",
-      description: "Crisp and refreshing, ideal for salads and sandwiches.",
-      category: "Fruits and Vegetables",
-    },
-    {
-      name: "Artisan Sourdough Bread",
-      price: "$4.99 / loaf",
-      description: "Handcrafted with a tangy flavor and chewy crust.",
-      category: "Bakery",
-    },
-    {
-      name: "Chocolate Croissants",
-      price: "$2.49 each",
-      description: "Buttery, flaky pastry with a rich chocolate filling.",
-      category: "Bakery",
-    },
-    {
-      name: "Wild-Caught Alaskan Salmon Fillet",
-      price: "$12.99 / lb",
-      description: "Sustainably sourced, rich in omega-3 fatty acids.",
-      category: "Meat and Seafood",
-    },
-    {
-      name: "Grass-Fed Angus Beef Ribeye Steak",
-      price: "$17.99 / lb",
-      description: "Juicy and flavorful, perfect for grilling or pan-searing.",
-      category: "Meat and Seafood",
-    },
-    {
-      name: "Cold Brew Coffee",
-      price: "$3.99 / bottle",
-      description: "Smooth and bold, with a hint of chocolate notes.",
-      category: "Beverage",
-    },
-    {
-      name: "Organic Green Tea",
-      price: "$2.99 / box (20 tea bags)",
-      description: "Refreshing and aromatic, packed with antioxidants.",
-      category: "Beverage",
-    },
-    {
-      name: "Gluten-Free Multigrain Crackers",
-      price: "$4.49 / box",
-      description: "Crispy and nutritious, perfect for cheese platters.",
-      category: "Biscuit and Snacks",
-    },
-    {
-      name: "Sea Salt Popcorn",
-      price: "$1.99 / bag",
-      description: "Lightly salted, satisfying snack for movie nights.",
-      category: "Biscuit and Snacks",
-    },
-  ];
-
-  const [products, setProducts] = useState(initialProducts);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-
-  const categories = [
+  const [categories] = useState([
     "Fruits and Vegetables",
     "Bakery",
     "Meat and Seafood",
     "Beverage",
     "Biscuit and Snacks",
-  ];
+  ]);
 
-  const filterProducts = (category) => {
-    // Filter products based on category
-    const filteredProducts = initialProducts.filter(
-      (product) => product.category === category
-    );
-    setProducts(filteredProducts);
-    setSelectedCategory(category); // Set selected category
+  const [products] = useState({
+    "Fruits and Vegetables": [
+      {
+        name: "Apple",
+        price: "$1.99",
+        description: "Fresh and delicious apple.",
+      },
+      {
+        name: "Broccoli",
+        price: "$2.49",
+        description: "Organic broccoli for a healthy diet.",
+      },
+      {
+        name: "Orange",
+        price: "$1.79",
+        description: "Sweet and juicy orange.",
+      },
+    ],
+    Bakery: [
+      {
+        name: "Croissant",
+        price: "$1.50",
+        description: "Buttery and flaky croissant.",
+      },
+      {
+        name: "Baguette",
+        price: "$2.00",
+        description: "Crusty French baguette.",
+      },
+      {
+        name: "Chocolate Cake",
+        price: "$4.99",
+        description: "Rich and decadent chocolate cake.",
+      },
+    ],
+    "Meat and Seafood": [
+      {
+        name: "Salmon Fillet",
+        price: "$10.99",
+        description: "Fresh salmon fillet.",
+      },
+      {
+        name: "Ribeye Steak",
+        price: "$15.99",
+        description: "Juicy ribeye steak.",
+      },
+    ],
+    Beverage: [
+      {
+        name: "Orange Juice",
+        price: "$3.99",
+        description: "Freshly squeezed orange juice.",
+      },
+      {
+        name: "Green Tea",
+        price: "$2.99",
+        description: "Healthy green tea.",
+      },
+    ],
+    "Biscuit and Snacks": [
+      {
+        name: "Chocolate Chip Cookies",
+        price: "$4.50",
+        description: "Classic chocolate chip cookies.",
+      },
+      {
+        name: "Potato Chips",
+        price: "$1.99",
+        description: "Crunchy potato chips.",
+      },
+    ],
+  });
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
   };
 
-  const resetProducts = () => {
-    // Reset products to initial list
-    setProducts(initialProducts);
-    setSelectedCategory(null); // Reset selected category
+  const handleShowAllItems = () => {
+    setSelectedCategory(null); // Set selectedCategory to null to display all items
   };
 
-  // Define your styles here
+  const buttonTextContainerStyles = {
+    display: "flex",
+    alignItems: "center",
+    marginTop: "1rem",
+  };
+
+  const buttonStyles = {
+    marginRight: "1rem",
+  };
+
+  const infoTextStyles = {
+    fontSize: "1rem",
+    color: "black",
+  };
+
   const categoryButtonsContainerStyles = {
     display: "flex",
     justifyContent: "center",
@@ -125,7 +141,7 @@ const Home = () => {
 
   const shopNowButtonStyles = {
     padding: "0.5rem 1rem",
-    backgroundColor: "#007bff",
+    backgroundColor: "darkgreen",
     color: "white",
     border: "none",
     borderRadius: "4px",
@@ -136,7 +152,24 @@ const Home = () => {
     <div className="home-container">
       <Navbar />
       <div className="home-banner-container">
-        {/* Your banner and other content */}
+        <div className="home-bannerImage-container">
+          <img src={BannerBackground} alt="" />
+        </div>
+        <div className="home-text-section">
+          <h1 className="primary-heading">Buy Fresh And Organic Grocery Food</h1>
+          <p className="primary-text">
+            Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et elit. Dolor turpis molestie dui magnis facilisis at fringilla quam
+          </p>
+          <div style={buttonTextContainerStyles}>
+            <button className="secondary-button" style={{ ...buttonStyles, backgroundColor: 'darkgreen' }}>
+              Shop Now <FiArrowRight />
+            </button>
+            <span style={infoTextStyles}>35k+ Users | 18k+ Products</span>
+          </div>
+        </div>
+        <div className="home-image-section">
+          <img src={BannerImage} alt="" />
+        </div>
       </div>
       <div className="shop-by-category-container">
         <h2 className="category-heading">Shop by Category</h2>
@@ -147,35 +180,53 @@ const Home = () => {
               className="category-button"
               style={{
                 ...categoryButtonStyles,
-                backgroundColor: 'white',
-                border: category === selectedCategory ? '2px solid darkgreen' : 'none',
+                backgroundColor: selectedCategory === category ? 'darkgreen' : '#f0f0f0',
+                color: selectedCategory === category ? 'white' : 'black',
               }}
-              onClick={() => filterProducts(category)}
+              onClick={() => handleCategoryClick(category)}
             >
               {category}
             </button>
           ))}
           <button
             className="category-button"
-            style={{ ...categoryButtonStyles, backgroundColor: 'white' }}
-            onClick={resetProducts}
+            style={{
+              ...categoryButtonStyles,
+              backgroundColor: selectedCategory === null ? 'darkgreen' : '#f0f0f0',
+              color: selectedCategory === null ? 'white' : 'black',
+            }}
+            onClick={handleShowAllItems}
           >
-            Reset
+            All Items
           </button>
         </div>
         <div className="products-list">
-          {products.map((product, index) => (
-            <div key={index} className="product-item" style={productItemStyles}>
-              <div className="product-details">
-                <h3 className="product-name">{product.name}</h3>
-                <p className="product-description">{product.description}</p>
-              </div>
-              <div className="product-price-shop">
-                <span className="product-price" style={productPriceStyles}>{product.price}</span>
-                <button className="shop-now-button" style={{ ...shopNowButtonStyles, backgroundColor: 'darkgreen' }}>SHOP NOW →</button>
-              </div>
-            </div>
-          ))}
+          {selectedCategory
+            ? products[selectedCategory].map((product, index) => (
+                <div key={index} className="product-item" style={productItemStyles}>
+                  <div className="product-details">
+                    <h3 className="product-name">{product.name}</h3>
+                    <p className="product-description">{product.description}</p>
+                  </div>
+                  <div className="product-price-shop">
+                    <span className="product-price" style={productPriceStyles}>{product.price}</span>
+                    <button className="shop-now-button" style={shopNowButtonStyles}>SHOP NOW →</button>
+                  </div>
+                </div>
+              ))
+            : categories.flatMap(category => products[category].map((product, index) => (
+                <div key={index} className="product-item" style={productItemStyles}>
+                  <div className="product-details">
+                    <h3 className="product-name">{product.name}</h3>
+                    <p className="product-description">{product.description}</p>
+                  </div>
+                  <div className="product-price-shop">
+                    <span className="product-price" style={productPriceStyles}>{product.price}</span>
+                    <button className="shop-now-button" style={shopNowButtonStyles}>SHOP NOW →</button>
+                  </div>
+                </div>
+              )))
+          }
         </div>
       </div>
     </div>
